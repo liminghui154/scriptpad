@@ -53,59 +53,135 @@
   --font-mono: ui-monospace, monospace;
 }
 
-/* 可爱主题装饰：渐变背景 */
+/* 可爱主题装饰：渐变背景 + 漂浮emoji */
 [data-theme="cute"] body {
-  background: linear-gradient(135deg, #fdf4f8 0%, #f0e0f5 50%, #fdf4f8 100%);
+  background: linear-gradient(135deg, #fdf4f8 0%, #fce4f0 30%, #f0e0f5 60%, #fdf4f8 100%);
+  position: relative;
+  overflow-x: hidden;
+}
+/* 漂浮装饰 emoji */
+[data-theme="cute"] body::before {
+  content: "🌸 ✨ ⭐ 🍭 🌸 ✨";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  pointer-events: none;
+  font-size: 1.5rem;
+  opacity: 0.15;
+  animation: cute-float 20s ease-in-out infinite;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 2rem 0;
+}
+@keyframes cute-float {
+  0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.12; }
+  25% { transform: translateY(-10px) rotate(2deg); opacity: 0.18; }
+  50% { transform: translateY(-5px) rotate(-1deg); opacity: 0.15; }
+  75% { transform: translateY(-15px) rotate(1deg); opacity: 0.2; }
 }
 [data-theme="cute"] .border-border {
   border-style: solid;
 }
-/* 可爱主题：卡片柔和阴影 */
+/* 可爱主题：卡片柔和阴影 + 顶部星星装饰 */
 [data-theme="cute"] .bg-card {
-  box-shadow: 0 2px 12px rgba(232, 121, 160, 0.1), 0 1px 4px rgba(232, 121, 160, 0.06);
+  box-shadow: 0 4px 16px rgba(232, 121, 160, 0.12), 0 1px 4px rgba(232, 121, 160, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+/* 卡片顶部星星线 */
+[data-theme="cute"] .bg-card::before {
+  content: "✦ ˚  ·  ✦  ˚  ·  ✦";
+  position: absolute;
+  top: 4px;
+  left: 0;
+  right: 0;
+  font-size: 0.5rem;
+  color: #e879a0;
+  opacity: 0.4;
+  letter-spacing: 0.5rem;
+  text-align: center;
 }
 /* 可爱主题：弹窗/对话框柔和阴影 */
 [data-theme="cute"] .bg-popover,
 [data-theme="cute"] .rounded-lg {
   box-shadow: 0 4px 20px rgba(232, 121, 160, 0.15);
 }
-/* 可爱主题：按钮 hover 弹跳 + 柔和阴影 */
+/* 可爱主题：按钮 渐变 + 果冻弹性动画 */
 [data-theme="cute"] .bg-primary {
-  box-shadow: 0 2px 8px rgba(232, 121, 160, 0.3);
-  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
+  background: linear-gradient(135deg, #e879a0 0%, #d4628a 50%, #c4547a 100%);
+  box-shadow: 0 4px 12px rgba(232, 121, 160, 0.35), 0 2px 4px rgba(232, 121, 160, 0.2);
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
+  border: none;
+  position: relative;
+  overflow: hidden;
+}
+/* 按钮光泽效果 */
+[data-theme="cute"] .bg-primary::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.25), transparent);
+  border-radius: inherit;
 }
 [data-theme="cute"] .bg-primary:hover {
-  transform: translateY(-1px) scale(1.02);
-  box-shadow: 0 4px 14px rgba(232, 121, 160, 0.4);
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 6px 20px rgba(232, 121, 160, 0.45), 0 3px 8px rgba(232, 121, 160, 0.25);
 }
 [data-theme="cute"] .bg-primary:active {
-  transform: translateY(0) scale(0.98);
+  transform: translateY(0) scale(0.97);
+  box-shadow: 0 2px 6px rgba(232, 121, 160, 0.3);
 }
-/* 可爱主题：列表项 hover 轻微浮起 */
-[data-theme="cute"] .rounded-md.transition-colors:hover {
-  transform: translateX(2px);
-  transition: transform 0.15s ease, background-color 0.15s ease;
-}
-/* 可爱主题：标签胶囊化 + 柔和 */
-[data-theme="cute"] .rounded.bg-secondary,
-[data-theme="cute"] .rounded.bg-primary\/10 {
+/* 可爱主题：停止按钮粉色警告风格 */
+[data-theme="cute"] .bg-destructive {
+  background: linear-gradient(135deg, #f43f5e, #e11d48);
+  box-shadow: 0 4px 12px rgba(244, 63, 94, 0.35);
   border-radius: 9999px;
-  padding-left: 0.625rem;
-  padding-right: 0.625rem;
+  border: none;
 }
-/* 可爱主题：输入框柔和 */
+[data-theme="cute"] .bg-destructive:hover {
+  transform: translateY(-1px) scale(1.02);
+  box-shadow: 0 6px 16px rgba(244, 63, 94, 0.4);
+}
+/* 可爱主题：标签胶囊化 + 渐变糖果色 + 柔和边框 */
+[data-theme="cute"] .rounded.bg-secondary,
+[data-theme="cute"] [class*="bg-primary/10"] {
+  background: linear-gradient(135deg, #fce4f0, #f0cce0);
+  border-radius: 9999px;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  border: 1px solid rgba(232, 121, 160, 0.3);
+  font-size: 0.7rem;
+  box-shadow: 0 1px 3px rgba(232, 121, 160, 0.15);
+}
+/* 可爱主题：输入框柔和圆角 + 聚焦发光 */
 [data-theme="cute"] input,
 [data-theme="cute"] textarea,
 [data-theme="cute"] select {
   border-radius: 0.75rem;
+  border: 2px solid #f0cce0;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
-/* 可爱主题：滚动条粉色 */
+[data-theme="cute"] input:focus,
+[data-theme="cute"] textarea:focus {
+  border-color: #e879a0;
+  box-shadow: 0 0 0 3px rgba(232, 121, 160, 0.15), 0 0 12px rgba(232, 121, 160, 0.1);
+  outline: none;
+}
+/* 可爱主题：滚动条粉色渐变 */
 [data-theme="cute"] ::-webkit-scrollbar-thumb {
-  background: #f0cce0;
+  background: linear-gradient(to bottom, #e879a0, #d4628a);
   border-radius: 3px;
 }
 [data-theme="cute"] ::-webkit-scrollbar-thumb:hover {
-  background: #e879a0;
+  background: linear-gradient(to bottom, #d4628a, #c4547a);
+  box-shadow: 0 0 6px rgba(232, 121, 160, 0.4);
 }
 
 /* ─────────────────────────────────────────────
@@ -197,7 +273,7 @@
 }
 /* 手帐主题：标签贴纸风格 */
 [data-theme="journal"] .rounded.bg-secondary,
-[data-theme="journal"] .rounded.bg-primary\/10 {
+[data-theme="journal"] .rounded[class*="bg-primary/10"] {
   border: 1px dashed #d4b896;
   border-radius: 2px;
   transform: rotate(-1deg);
@@ -209,7 +285,7 @@
   box-shadow: 2px 2px 0 #d4b89660;
 }
 /* 手帐主题：选中项标记感 */
-[data-theme="journal"] .bg-primary\/10 {
+[data-theme="journal"] [class*="bg-primary/10"] {
   border-left: 3px solid #8b5e3c;
   background: #ede3d4;
 }
@@ -327,7 +403,7 @@
 }
 /* 机甲主题：标签 HUD 风格 */
 [data-theme="mecha"] .rounded.bg-secondary,
-[data-theme="mecha"] .rounded.bg-primary\/10 {
+[data-theme="mecha"] .rounded[class*="bg-primary/10"] {
   border-radius: 0;
   border: 1px solid rgba(0, 212, 255, 0.3);
   text-transform: uppercase;
@@ -335,7 +411,7 @@
   font-size: 0.65rem;
 }
 /* 机甲主题：选中项左侧发光条 */
-[data-theme="mecha"] .bg-primary\/10 {
+[data-theme="mecha"] [class*="bg-primary/10"] {
   border-left: 2px solid #00d4ff;
   box-shadow: inset 4px 0 8px rgba(0, 212, 255, 0.1);
 }
