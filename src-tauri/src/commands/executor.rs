@@ -182,8 +182,22 @@ pub fn stop_execution(execution_id: i64) -> Result<(), String> {
     };
 
     if let Some(pid) = pid {
-        unsafe {
-            libc::kill(pid as i32, libc::SIGTERM);
+        #[cfg(unix)]
+        {
+            unsafe { libc::kill(pid as i32, libc::SIGTERM); }
+        }
+        #[cfg(windows)]
+        {
+            use windows::Win32::Foundation::CloseHandle;
+            use windows::Win32::System::Threading::{
+                OpenProcess, PROCESS_TERMINATE, TerminateProcess,
+            };
+            unsafe {
+                let handle = OpenProcess(PROCESS_TERMINATE, false, pid)
+                    .map_err(|e| format!("OpenProcess failed: {}", e))?;
+                let _ = TerminateProcess(handle, 1);
+                let _ = CloseHandle(handle);
+            }
         }
         Ok(())
     } else {
