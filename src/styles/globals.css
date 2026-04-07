@@ -90,7 +90,6 @@
 [data-theme="cute"] .bg-card {
   box-shadow: 0 4px 16px rgba(232, 121, 160, 0.12), 0 1px 4px rgba(232, 121, 160, 0.08);
   position: relative;
-  overflow: hidden;
 }
 /* 卡片顶部星星线 */
 [data-theme="cute"] .bg-card::before {
