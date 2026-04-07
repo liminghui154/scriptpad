@@ -416,16 +416,17 @@
   --font-mono: "JetBrains Mono", "SF Mono", ui-monospace, monospace;
 }
 
-/* 机甲主题装饰：网格背景 + 扫描线 */
+/* 机甲主题装饰：增强网格背景 */
 [data-theme="mecha"] body {
   background-color: #050c14;
   background-image:
-    linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
-  background-size: 32px 32px;
+    linear-gradient(rgba(0, 212, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 212, 255, 0.04) 1px, transparent 1px),
+    radial-gradient(ellipse at 50% 0%, rgba(0, 212, 255, 0.08) 0%, transparent 60%);
+  background-size: 24px 24px, 24px 24px, 100% 100%;
   background-attachment: fixed;
 }
-/* 机甲主题：扫描线动画覆盖层 */
+/* 扫描线动画覆盖层 */
 [data-theme="mecha"] body::after {
   content: "";
   position: fixed;
@@ -433,16 +434,39 @@
   pointer-events: none;
   z-index: 9999;
   background: repeating-linear-gradient(
-    transparent,
-    transparent 2px,
-    rgba(0, 212, 255, 0.015) 2px,
-    rgba(0, 212, 255, 0.015) 4px
+    0deg,
+    transparent 0px,
+    transparent 3px,
+    rgba(0, 212, 255, 0.02) 3px,
+    rgba(0, 212, 255, 0.02) 4px
   );
-  animation: mecha-scanline 8s linear infinite;
+  animation: mecha-scanline 6s linear infinite;
+}
+/* 底部数据流线条 */
+[data-theme="mecha"] body::before {
+  content: "";
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(0, 212, 255, 0.1) 20%,
+    rgba(0, 212, 255, 0.6) 50%,
+    rgba(0, 212, 255, 0.1) 80%,
+    transparent 100%
+  );
+  animation: mecha-dataflow 3s ease-in-out infinite;
+  z-index: 9998;
 }
 @keyframes mecha-scanline {
   0% { transform: translateY(0); }
-  100% { transform: translateY(32px); }
+  100% { transform: translateY(24px); }
+}
+@keyframes mecha-dataflow {
+  0%, 100% { opacity: 0.3; transform: scaleX(0.8); }
+  50% { opacity: 0.8; transform: scaleX(1); }
 }
 /* 机甲主题：发光边框（增强） */
 [data-theme="mecha"] .border-r,
@@ -451,67 +475,217 @@
   border-color: #1a3a55;
   box-shadow: 0 0 8px rgba(0, 212, 255, 0.08), inset 0 0 8px rgba(0, 212, 255, 0.03);
 }
-/* 机甲主题：卡片斜切角效果 */
+/* 机甲主题：卡片斜切角 + HUD发光边框 */
 [data-theme="mecha"] .bg-card {
-  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
-  box-shadow: 0 0 15px rgba(0, 212, 255, 0.08);
+  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
+  box-shadow:
+    0 0 15px rgba(0, 212, 255, 0.1),
+    inset 0 0 20px rgba(0, 212, 255, 0.03);
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  position: relative;
+  background: linear-gradient(135deg, #091520, #0a1a2a);
 }
-/* 机甲主题：弹窗斜切角 */
+/* 卡片角落角标装饰 */
+[data-theme="mecha"] .bg-card::before {
+  content: "◆";
+  position: absolute;
+  top: 4px;
+  right: 16px;
+  font-size: 0.5rem;
+  color: rgba(0, 212, 255, 0.4);
+}
+[data-theme="mecha"] .bg-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 14px;
+  height: 14px;
+  background: linear-gradient(135deg, transparent 50%, rgba(0, 212, 255, 0.15) 50%);
+}
+/* 机甲主题：弹窗斜切角 + 强发光 */
 [data-theme="mecha"] .rounded-lg {
   border-radius: 0;
-  clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
-  box-shadow: 0 0 20px rgba(0, 212, 255, 0.15), 0 0 40px rgba(0, 212, 255, 0.05);
+  clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+  box-shadow:
+    0 0 25px rgba(0, 212, 255, 0.2),
+    0 0 50px rgba(0, 212, 255, 0.08),
+    inset 0 0 15px rgba(0, 212, 255, 0.05);
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  background: linear-gradient(135deg, #091520, #0d2035);
 }
 /* 机甲主题：输入框发光焦点（增强） */
 [data-theme="mecha"] input:focus,
 [data-theme="mecha"] textarea:focus {
   box-shadow: 0 0 0 1px #00d4ff, 0 0 15px rgba(0, 212, 255, 0.3), 0 0 30px rgba(0, 212, 255, 0.1);
 }
-/* 机甲主题：运行按钮强发光 + 脉冲 */
+/* 机甲主题：运行按钮强发光 + 脉冲 + 斜边 */
 [data-theme="mecha"] .bg-primary {
-  box-shadow: 0 0 12px rgba(0, 212, 255, 0.5), 0 0 30px rgba(0, 212, 255, 0.2);
-  animation: mecha-pulse 2s ease-in-out infinite;
+  background: linear-gradient(135deg, #00d4ff, #00a8cc, #0088aa);
+  box-shadow:
+    0 0 15px rgba(0, 212, 255, 0.6),
+    0 0 35px rgba(0, 212, 255, 0.3),
+    0 0 60px rgba(0, 212, 255, 0.1);
+  animation: mecha-pulse 1.5s ease-in-out infinite;
   border-radius: 0;
   clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+  color: #050c14;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border: none;
+  position: relative;
+  overflow: hidden;
+}
+/* 按钮内部电路纹理 */
+[data-theme="mecha"] .bg-primary::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.1) 50%, transparent 100%);
+  transform: translateX(-100%);
+  animation: mecha-shine 2s ease-in-out infinite;
 }
 @keyframes mecha-pulse {
-  0%, 100% { box-shadow: 0 0 12px rgba(0, 212, 255, 0.5), 0 0 30px rgba(0, 212, 255, 0.2); }
-  50% { box-shadow: 0 0 18px rgba(0, 212, 255, 0.7), 0 0 40px rgba(0, 212, 255, 0.3); }
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.6), 0 0 35px rgba(0, 212, 255, 0.3);
+    text-shadow: 0 0 8px rgba(0, 212, 255, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(0, 212, 255, 0.9), 0 0 50px rgba(0, 212, 255, 0.5);
+    text-shadow: 0 0 12px rgba(0, 212, 255, 0.8);
+  }
 }
-/* 机甲主题：停止按钮红色发光 */
+@keyframes mecha-shine {
+  0% { transform: translateX(-100%); }
+  50%, 100% { transform: translateX(100%); }
+}
+[data-theme="mecha"] .bg-primary:hover {
+  animation: mecha-glitch 0.3s ease-in-out infinite;
+}
+@keyframes mecha-glitch {
+  0%, 100% { transform: translate(0); }
+  25% { transform: translate(-1px, 1px); }
+  50% { transform: translate(1px, -1px); }
+  75% { transform: translate(-1px, 0); }
+}
+/* 机甲主题：停止按钮红色危险发光 */
 [data-theme="mecha"] .bg-destructive {
-  box-shadow: 0 0 12px rgba(255, 51, 102, 0.5), 0 0 30px rgba(255, 51, 102, 0.2);
+  background: linear-gradient(135deg, #ff3366, #cc2952, #991f3d);
+  box-shadow:
+    0 0 15px rgba(255, 51, 102, 0.6),
+    0 0 35px rgba(255, 51, 102, 0.3);
   border-radius: 0;
   clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
-}
-/* 机甲主题：标签 HUD 风格 */
-[data-theme="mecha"] .rounded.bg-secondary,
-[data-theme="mecha"] .rounded[class*="bg-primary/10"] {
-  border-radius: 0;
-  border: 1px solid rgba(0, 212, 255, 0.3);
+  color: #fff;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  border: none;
 }
-/* 机甲主题：选中项左侧发光条 */
-[data-theme="mecha"] [class*="bg-primary/10"] {
+[data-theme="mecha"] .bg-destructive:hover {
+  box-shadow:
+    0 0 20px rgba(255, 51, 102, 0.8),
+    0 0 40px rgba(255, 51, 102, 0.5);
+  animation: mecha-danger-pulse 0.8s ease-in-out infinite;
+}
+@keyframes mecha-danger-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+/* 机甲主题：标签 HUD LED矩阵风格 */
+[data-theme="mecha"] .rounded.bg-secondary,
+[data-theme="mecha"] [class*="bg-primary\/10"] {
+  border-radius: 0;
+  border: 1px solid rgba(0, 212, 255, 0.4);
+  background: rgba(0, 212, 255, 0.08);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.6rem;
+  padding: 3px 8px;
+  color: #00d4ff;
+  box-shadow:
+    inset 0 0 8px rgba(0, 212, 255, 0.1),
+    0 0 4px rgba(0, 212, 255, 0.2);
+}
+[data-theme="mecha"] [class*="bg-primary\/10"] {
   border-left: 2px solid #00d4ff;
-  box-shadow: inset 4px 0 8px rgba(0, 212, 255, 0.1);
+  background: rgba(0, 212, 255, 0.12);
+  box-shadow:
+    inset 4px 0 12px rgba(0, 212, 255, 0.1),
+    0 0 8px rgba(0, 212, 255, 0.15);
 }
-/* 机甲主题：输入框方角 */
+/* 机甲主题：输入框方角 + 霓虹聚焦 */
 [data-theme="mecha"] input,
 [data-theme="mecha"] textarea,
 [data-theme="mecha"] select {
   border-radius: 0;
+  border: 1px solid #1a3a55;
+  background: #0a1a2a;
+  color: #00d4ff;
+  font-family: 'JetBrains Mono', monospace;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
-/* 机甲主题：滚动条霓虹 */
+[data-theme="mecha"] input:focus,
+[data-theme="mecha"] textarea:focus {
+  border-color: #00d4ff;
+  box-shadow:
+    0 0 0 1px #00d4ff,
+    0 0 15px rgba(0, 212, 255, 0.4),
+    0 0 30px rgba(0, 212, 255, 0.15),
+    inset 0 0 10px rgba(0, 212, 255, 0.05);
+  outline: none;
+}
+/* 输入框占位符霓虹色 */
+[data-theme="mecha"] input::placeholder,
+[data-theme="mecha"] textarea::placeholder {
+  color: rgba(0, 212, 255, 0.4);
+}
+/* 机甲主题：滚动条霓虹发光 */
+[data-theme="mecha"] ::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+[data-theme="mecha"] ::-webkit-scrollbar-track {
+  background: #0a1a2a;
+}
 [data-theme="mecha"] ::-webkit-scrollbar-thumb {
-  background: #1a3a55;
+  background: linear-gradient(to bottom, #1a3a55, #00d4ff, #1a3a55);
   border-radius: 0;
+  box-shadow: 0 0 6px rgba(0, 212, 255, 0.5);
 }
 [data-theme="mecha"] ::-webkit-scrollbar-thumb:hover {
-  background: #00d4ff;
-  box-shadow: 0 0 6px rgba(0, 212, 255, 0.5);
+  background: linear-gradient(to bottom, #00d4ff, #00ffff, #00d4ff);
+  box-shadow: 0 0 10px rgba(0, 212, 255, 0.8);
+}
+/* 机甲主题：角落准星装饰 */
+[data-theme="mecha"] .hud-corner {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-color: rgba(0, 212, 255, 0.4);
+  border-style: solid;
+}
+[data-theme="mecha"] .hud-corner-tl {
+  top: 4px;
+  left: 4px;
+  border-width: 2px 0 0 2px;
+}
+[data-theme="mecha"] .hud-corner-tr {
+  top: 4px;
+  right: 4px;
+  border-width: 2px 2px 0 0;
+}
+[data-theme="mecha"] .hud-corner-bl {
+  bottom: 4px;
+  left: 4px;
+  border-width: 0 0 2px 2px;
+}
+[data-theme="mecha"] .hud-corner-br {
+  bottom: 4px;
+  right: 4px;
+  border-width: 0 2px 2px 0;
 }
 
 /* ─────────────────────────────────────────────
