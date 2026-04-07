@@ -212,10 +212,10 @@ export function ScriptForm({ script, categories, onSave, onClose }: Props) {
 
           {/* Submit */}
           <div className="flex justify-end gap-2 pt-2">
-            <button type="button" onClick={onClose} className="px-4 py-2 text-sm rounded-md hover:bg-accent">
+            <button type="button" onClick={onClose} className="px-4 py-2 text-sm rounded-md border border-input hover:bg-accent text-foreground">
               取消
             </button>
-            <button type="submit" className="px-4 py-2 text-sm bg-primary text-primary-foreground rounded-md hover:bg-primary/90">
+            <button type="submit" className="px-4 py-2 text-sm bg-primary text-primary-foreground rounded-md hover:opacity-90">
               {script ? '保存' : '创建'}
             </button>
           </div>
