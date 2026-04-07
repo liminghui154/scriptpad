@@ -424,7 +424,6 @@
     linear-gradient(90deg, rgba(0, 212, 255, 0.04) 1px, transparent 1px),
     radial-gradient(ellipse at 50% 0%, rgba(0, 212, 255, 0.08) 0%, transparent 60%);
   background-size: 24px 24px, 24px 24px, 100% 100%;
-  background-attachment: fixed;
 }
 /* 扫描线动画覆盖层 */
 [data-theme="mecha"] body::after {
@@ -504,7 +503,8 @@
   background: linear-gradient(135deg, transparent 50%, rgba(0, 212, 255, 0.15) 50%);
 }
 /* 机甲主题：弹窗斜切角 + 强发光 */
-[data-theme="mecha"] .rounded-lg {
+[data-theme="mecha"] [role="dialog"],
+[data-theme="mecha"] .dialog {
   border-radius: 0;
   clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
   box-shadow:
@@ -513,11 +513,6 @@
     inset 0 0 15px rgba(0, 212, 255, 0.05);
   border: 1px solid rgba(0, 212, 255, 0.3);
   background: linear-gradient(135deg, #091520, #0d2035);
-}
-/* 机甲主题：输入框发光焦点（增强） */
-[data-theme="mecha"] input:focus,
-[data-theme="mecha"] textarea:focus {
-  box-shadow: 0 0 0 1px #00d4ff, 0 0 15px rgba(0, 212, 255, 0.3), 0 0 30px rgba(0, 212, 255, 0.1);
 }
 /* 机甲主题：运行按钮强发光 + 脉冲 + 斜边 */
 [data-theme="mecha"] .bg-primary {
@@ -560,15 +555,6 @@
 @keyframes mecha-shine {
   0% { transform: translateX(-100%); }
   50%, 100% { transform: translateX(100%); }
-}
-[data-theme="mecha"] .bg-primary:hover {
-  animation: mecha-glitch 0.3s ease-in-out infinite;
-}
-@keyframes mecha-glitch {
-  0%, 100% { transform: translate(0); }
-  25% { transform: translate(-1px, 1px); }
-  50% { transform: translate(1px, -1px); }
-  75% { transform: translate(-1px, 0); }
 }
 /* 机甲主题：停止按钮红色危险发光 */
 [data-theme="mecha"] .bg-destructive {
@@ -658,6 +644,11 @@
 [data-theme="mecha"] ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(to bottom, #00d4ff, #00ffff, #00d4ff);
   box-shadow: 0 0 10px rgba(0, 212, 255, 0.8);
+}
+/* Firefox scrollbar support */
+[data-theme="mecha"] {
+  scrollbar-width: thin;
+  scrollbar-color: #1a3a55 #0a1a2a;
 }
 /* 机甲主题：角落准星装饰 */
 [data-theme="mecha"] .hud-corner {
