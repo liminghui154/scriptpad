@@ -3,6 +3,7 @@ import { Search, Plus, FolderOpen } from 'lucide-react';
 import type { Category, Script } from '@/lib/types';
 import { CategoryList } from './CategoryList';
 import { ScriptList } from './ScriptList';
+import { ThemeSwitcher } from './ThemeSwitcher';
 
 interface Props {
   categories: Category[];
@@ -87,6 +88,9 @@ export function Sidebar({
           onSelect={onSelectScript}
         />
       </div>
+
+      {/* Theme Switcher */}
+      <ThemeSwitcher />
     </div>
   );
 }

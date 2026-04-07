@@ -25,6 +25,339 @@
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 }
 
+/* ─────────────────────────────────────────────
+   主题：可爱治愈 cute
+───────────────────────────────────────────── */
+[data-theme="cute"] {
+  --color-background: #fdf4f8;
+  --color-foreground: #4a2540;
+  --color-card: #fff0f7;
+  --color-card-foreground: #4a2540;
+  --color-popover: #fff0f7;
+  --color-popover-foreground: #4a2540;
+  --color-primary: #e879a0;
+  --color-primary-foreground: #ffffff;
+  --color-secondary: #fce4f0;
+  --color-secondary-foreground: #4a2540;
+  --color-muted: #fde8f3;
+  --color-muted-foreground: #9e6b87;
+  --color-accent: #fce4f0;
+  --color-accent-foreground: #4a2540;
+  --color-destructive: #f43f5e;
+  --color-destructive-foreground: #ffffff;
+  --color-border: #f0cce0;
+  --color-input: #f0cce0;
+  --color-ring: #e879a0;
+  --radius: 1rem;
+  --font-sans: "Helvetica Neue", "PingFang SC", "Hiragino Sans", system-ui, sans-serif;
+  --font-mono: ui-monospace, monospace;
+}
+
+/* 可爱主题装饰：渐变背景 */
+[data-theme="cute"] body {
+  background: linear-gradient(135deg, #fdf4f8 0%, #f0e0f5 50%, #fdf4f8 100%);
+}
+[data-theme="cute"] .border-border {
+  border-style: solid;
+}
+/* 可爱主题：卡片柔和阴影 */
+[data-theme="cute"] .bg-card {
+  box-shadow: 0 2px 12px rgba(232, 121, 160, 0.1), 0 1px 4px rgba(232, 121, 160, 0.06);
+}
+/* 可爱主题：弹窗/对话框柔和阴影 */
+[data-theme="cute"] .bg-popover,
+[data-theme="cute"] .rounded-lg {
+  box-shadow: 0 4px 20px rgba(232, 121, 160, 0.15);
+}
+/* 可爱主题：按钮 hover 弹跳 + 柔和阴影 */
+[data-theme="cute"] .bg-primary {
+  box-shadow: 0 2px 8px rgba(232, 121, 160, 0.3);
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
+}
+[data-theme="cute"] .bg-primary:hover {
+  transform: translateY(-1px) scale(1.02);
+  box-shadow: 0 4px 14px rgba(232, 121, 160, 0.4);
+}
+[data-theme="cute"] .bg-primary:active {
+  transform: translateY(0) scale(0.98);
+}
+/* 可爱主题：列表项 hover 轻微浮起 */
+[data-theme="cute"] .rounded-md.transition-colors:hover {
+  transform: translateX(2px);
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+/* 可爱主题：标签胶囊化 + 柔和 */
+[data-theme="cute"] .rounded.bg-secondary,
+[data-theme="cute"] .rounded.bg-primary\/10 {
+  border-radius: 9999px;
+  padding-left: 0.625rem;
+  padding-right: 0.625rem;
+}
+/* 可爱主题：输入框柔和 */
+[data-theme="cute"] input,
+[data-theme="cute"] textarea,
+[data-theme="cute"] select {
+  border-radius: 0.75rem;
+}
+/* 可爱主题：滚动条粉色 */
+[data-theme="cute"] ::-webkit-scrollbar-thumb {
+  background: #f0cce0;
+  border-radius: 3px;
+}
+[data-theme="cute"] ::-webkit-scrollbar-thumb:hover {
+  background: #e879a0;
+}
+
+/* ─────────────────────────────────────────────
+   主题：手帐 journal
+───────────────────────────────────────────── */
+[data-theme="journal"] {
+  --color-background: #faf6ee;
+  --color-foreground: #3d2a1e;
+  --color-card: #fdf8f0;
+  --color-card-foreground: #3d2a1e;
+  --color-popover: #fdf8f0;
+  --color-popover-foreground: #3d2a1e;
+  --color-primary: #8b5e3c;
+  --color-primary-foreground: #fff8f0;
+  --color-secondary: #ede3d4;
+  --color-secondary-foreground: #3d2a1e;
+  --color-muted: #e8dece;
+  --color-muted-foreground: #8a7060;
+  --color-accent: #ede3d4;
+  --color-accent-foreground: #3d2a1e;
+  --color-destructive: #c0392b;
+  --color-destructive-foreground: #fff8f0;
+  --color-border: #d4b896;
+  --color-input: #d4b896;
+  --color-ring: #8b5e3c;
+  --radius: 0.25rem;
+  --font-sans: "Georgia", "Noto Serif SC", "STSong", serif;
+  --font-mono: "Courier New", ui-monospace, monospace;
+}
+
+/* 手帐主题装饰：纸张纹理（细横线） */
+[data-theme="journal"] body {
+  background-color: #faf6ee;
+  background-image: repeating-linear-gradient(
+    transparent,
+    transparent 27px,
+    #d4b89640 28px
+  );
+  background-attachment: fixed;
+}
+/* 手帐主题：边框用虚线风格 */
+[data-theme="journal"] .border-border {
+  border-style: dashed;
+}
+[data-theme="journal"] .border-r {
+  border-right-style: dashed;
+}
+[data-theme="journal"] .border-b {
+  border-bottom-style: dashed;
+}
+/* 手帐主题：卡片纸张质感阴影 */
+[data-theme="journal"] .bg-card {
+  box-shadow: 2px 3px 0 #d4b89650;
+  border-radius: 2px;
+}
+/* 手帐主题：侧边栏顶部"胶带"装饰 */
+[data-theme="journal"] .bg-card::before {
+  content: "";
+  display: block;
+  height: 6px;
+  margin: 0 1rem 0.5rem;
+  background: repeating-linear-gradient(
+    90deg,
+    #d4b89680 0px,
+    #d4b89680 8px,
+    transparent 8px,
+    transparent 12px
+  );
+  border-radius: 1px;
+}
+/* 手帐主题：弹窗/对话框"胶带"顶部装饰 */
+[data-theme="journal"] .rounded-lg {
+  position: relative;
+  box-shadow: 3px 4px 0 #d4b89640;
+}
+[data-theme="journal"] .rounded-lg::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-1deg);
+  width: 80px;
+  height: 16px;
+  background: #e8dece;
+  border: 1px dashed #d4b896;
+  border-radius: 2px;
+  opacity: 0.85;
+  z-index: 1;
+}
+/* 手帐主题：标签贴纸风格 */
+[data-theme="journal"] .rounded.bg-secondary,
+[data-theme="journal"] .rounded.bg-primary\/10 {
+  border: 1px dashed #d4b896;
+  border-radius: 2px;
+  transform: rotate(-1deg);
+  background: #ede3d4;
+}
+/* 手帐主题：按钮手绘感 */
+[data-theme="journal"] .bg-primary {
+  border: 2px dashed #6b4226;
+  box-shadow: 2px 2px 0 #d4b89660;
+}
+/* 手帐主题：选中项标记感 */
+[data-theme="journal"] .bg-primary\/10 {
+  border-left: 3px solid #8b5e3c;
+  background: #ede3d4;
+}
+/* 手帐主题：输入框手绘边框 */
+[data-theme="journal"] input,
+[data-theme="journal"] textarea,
+[data-theme="journal"] select {
+  border-style: dashed;
+  border-radius: 2px;
+}
+/* 手帐主题：滚动条牛皮纸色 */
+[data-theme="journal"] ::-webkit-scrollbar-thumb {
+  background: #d4b896;
+  border-radius: 1px;
+}
+[data-theme="journal"] ::-webkit-scrollbar-thumb:hover {
+  background: #8b5e3c;
+}
+
+/* ─────────────────────────────────────────────
+   主题：炫酷机甲 mecha
+───────────────────────────────────────────── */
+[data-theme="mecha"] {
+  --color-background: #050c14;
+  --color-foreground: #c8e8f4;
+  --color-card: #091520;
+  --color-card-foreground: #c8e8f4;
+  --color-popover: #091520;
+  --color-popover-foreground: #c8e8f4;
+  --color-primary: #00d4ff;
+  --color-primary-foreground: #050c14;
+  --color-secondary: #0d2035;
+  --color-secondary-foreground: #c8e8f4;
+  --color-muted: #0a1a2a;
+  --color-muted-foreground: #5d9ab8;
+  --color-accent: #0d2035;
+  --color-accent-foreground: #c8e8f4;
+  --color-destructive: #ff3366;
+  --color-destructive-foreground: #050c14;
+  --color-border: #1a3a55;
+  --color-input: #1a3a55;
+  --color-ring: #00d4ff;
+  --radius: 0rem;
+  --font-sans: "JetBrains Mono", "SF Mono", "Consolas", ui-monospace, monospace;
+  --font-mono: "JetBrains Mono", "SF Mono", ui-monospace, monospace;
+}
+
+/* 机甲主题装饰：网格背景 + 扫描线 */
+[data-theme="mecha"] body {
+  background-color: #050c14;
+  background-image:
+    linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
+  background-size: 32px 32px;
+  background-attachment: fixed;
+}
+/* 机甲主题：扫描线动画覆盖层 */
+[data-theme="mecha"] body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  background: repeating-linear-gradient(
+    transparent,
+    transparent 2px,
+    rgba(0, 212, 255, 0.015) 2px,
+    rgba(0, 212, 255, 0.015) 4px
+  );
+  animation: mecha-scanline 8s linear infinite;
+}
+@keyframes mecha-scanline {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(32px); }
+}
+/* 机甲主题：发光边框（增强） */
+[data-theme="mecha"] .border-r,
+[data-theme="mecha"] .border-b,
+[data-theme="mecha"] .border {
+  border-color: #1a3a55;
+  box-shadow: 0 0 8px rgba(0, 212, 255, 0.08), inset 0 0 8px rgba(0, 212, 255, 0.03);
+}
+/* 机甲主题：卡片斜切角效果 */
+[data-theme="mecha"] .bg-card {
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+  box-shadow: 0 0 15px rgba(0, 212, 255, 0.08);
+}
+/* 机甲主题：弹窗斜切角 */
+[data-theme="mecha"] .rounded-lg {
+  border-radius: 0;
+  clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.15), 0 0 40px rgba(0, 212, 255, 0.05);
+}
+/* 机甲主题：输入框发光焦点（增强） */
+[data-theme="mecha"] input:focus,
+[data-theme="mecha"] textarea:focus {
+  box-shadow: 0 0 0 1px #00d4ff, 0 0 15px rgba(0, 212, 255, 0.3), 0 0 30px rgba(0, 212, 255, 0.1);
+}
+/* 机甲主题：运行按钮强发光 + 脉冲 */
+[data-theme="mecha"] .bg-primary {
+  box-shadow: 0 0 12px rgba(0, 212, 255, 0.5), 0 0 30px rgba(0, 212, 255, 0.2);
+  animation: mecha-pulse 2s ease-in-out infinite;
+  border-radius: 0;
+  clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+}
+@keyframes mecha-pulse {
+  0%, 100% { box-shadow: 0 0 12px rgba(0, 212, 255, 0.5), 0 0 30px rgba(0, 212, 255, 0.2); }
+  50% { box-shadow: 0 0 18px rgba(0, 212, 255, 0.7), 0 0 40px rgba(0, 212, 255, 0.3); }
+}
+/* 机甲主题：停止按钮红色发光 */
+[data-theme="mecha"] .bg-destructive {
+  box-shadow: 0 0 12px rgba(255, 51, 102, 0.5), 0 0 30px rgba(255, 51, 102, 0.2);
+  border-radius: 0;
+  clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+}
+/* 机甲主题：标签 HUD 风格 */
+[data-theme="mecha"] .rounded.bg-secondary,
+[data-theme="mecha"] .rounded.bg-primary\/10 {
+  border-radius: 0;
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.65rem;
+}
+/* 机甲主题：选中项左侧发光条 */
+[data-theme="mecha"] .bg-primary\/10 {
+  border-left: 2px solid #00d4ff;
+  box-shadow: inset 4px 0 8px rgba(0, 212, 255, 0.1);
+}
+/* 机甲主题：输入框方角 */
+[data-theme="mecha"] input,
+[data-theme="mecha"] textarea,
+[data-theme="mecha"] select {
+  border-radius: 0;
+}
+/* 机甲主题：滚动条霓虹 */
+[data-theme="mecha"] ::-webkit-scrollbar-thumb {
+  background: #1a3a55;
+  border-radius: 0;
+}
+[data-theme="mecha"] ::-webkit-scrollbar-thumb:hover {
+  background: #00d4ff;
+  box-shadow: 0 0 6px rgba(0, 212, 255, 0.5);
+}
+
+/* ─────────────────────────────────────────────
+   全局基础样式
+───────────────────────────────────────────── */
 * {
   border-color: var(--color-border);
 }

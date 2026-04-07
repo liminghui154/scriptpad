@@ -9,10 +9,12 @@ import { useCategories } from '@/hooks/useCategories';
 import { useScripts } from '@/hooks/useScripts';
 import { useExecution } from '@/hooks/useExecution';
 import type { CreateScript } from '@/lib/types';
+import { ThemeProvider, useTheme } from '@/lib/theme';
 import { Terminal } from 'lucide-react';
 import { open, ask } from '@tauri-apps/plugin-dialog';
 
-function App() {
+function AppInner() {
+  const { theme } = useTheme();
   const [search, setSearch] = useState('');
   const [showForm, setShowForm] = useState(false);
   const [editMode, setEditMode] = useState(false);
@@ -94,7 +96,7 @@ function App() {
   };
 
   return (
-    <div className="flex h-screen overflow-hidden bg-background text-foreground">
+    <div data-theme={theme} className="flex h-screen overflow-hidden bg-background text-foreground">
       <div style={{ width: sidebarWidth, flexShrink: 0 }}>
         <Sidebar
           categories={categories}
@@ -167,6 +169,14 @@ function App() {
         />
       )}
     </div>
+  );
+}
+
+function App() {
+  return (
+    <ThemeProvider>
+      <AppInner />
+    </ThemeProvider>
   );
 }
 
