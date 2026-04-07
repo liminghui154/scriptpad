@@ -212,15 +212,30 @@
   --font-mono: "Courier New", ui-monospace, monospace;
 }
 
-/* 手帐主题装饰：纸张纹理（细横线） */
+/* 手帐主题装饰：纸张纹理 + 边缘装饰线 */
 [data-theme="journal"] body {
   background-color: #faf6ee;
-  background-image: repeating-linear-gradient(
-    transparent,
-    transparent 27px,
-    #d4b89640 28px
-  );
+  background-image:
+    repeating-linear-gradient(
+      transparent,
+      transparent 27px,
+      #d4b89635 28px
+    ),
+    linear-gradient(to right, transparent 30px, #d4b89620 30px, #d4b89620 31px, transparent 31px);
   background-attachment: fixed;
+  background-size: 100% 28px, 100% 100%;
+  background-position: 0 0, 0 0;
+}
+/* 纸张边缘红色竖线装饰 */
+[data-theme="journal"] body::before {
+  content: "";
+  position: fixed;
+  left: 31px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: rgba(220, 50, 50, 0.15);
+  z-index: 0;
 }
 /* 手帐主题：边框用虚线风格 */
 [data-theme="journal"] .border-border {
@@ -232,60 +247,116 @@
 [data-theme="journal"] .border-b {
   border-bottom-style: dashed;
 }
-/* 手帐主题：卡片纸张质感阴影 */
+/* 手帐主题：卡片纸张质感阴影 + 胶带 + 随机微旋转 */
 [data-theme="journal"] .bg-card {
-  box-shadow: 2px 3px 0 #d4b89650;
+  box-shadow: 2px 3px 0 #d4b89650, 4px 5px 0 #d4b89630;
   border-radius: 2px;
+  position: relative;
+  transform: rotate(-0.3deg);
 }
-/* 手帐主题：侧边栏顶部"胶带"装饰 */
+/* 胶带装饰 */
 [data-theme="journal"] .bg-card::before {
   content: "";
   display: block;
-  height: 6px;
-  margin: 0 1rem 0.5rem;
+  height: 8px;
+  margin: 0 1.5rem 0.75rem;
   background: repeating-linear-gradient(
     90deg,
-    #d4b89680 0px,
-    #d4b89680 8px,
-    transparent 8px,
-    transparent 12px
+    rgba(212, 184, 150, 0.7) 0px,
+    rgba(212, 184, 150, 0.7) 6px,
+    transparent 6px,
+    transparent 10px
   );
   border-radius: 1px;
+  opacity: 0.9;
 }
 /* 手帐主题：弹窗/对话框"胶带"顶部装饰 */
 [data-theme="journal"] .rounded-lg {
   position: relative;
-  box-shadow: 3px 4px 0 #d4b89640;
+  box-shadow: 3px 4px 0 #d4b89640, 5px 6px 0 #d4b89625;
+  border-radius: 3px;
+  border: 1px dashed #d4b896;
 }
+/* 顶部胶带 */
 [data-theme="journal"] .rounded-lg::before {
   content: "";
   position: absolute;
-  top: -8px;
+  top: -10px;
   left: 50%;
   transform: translateX(-50%) rotate(-1deg);
-  width: 80px;
-  height: 16px;
-  background: #e8dece;
+  width: 90px;
+  height: 18px;
+  background: linear-gradient(to bottom, #ede3d4, #e8dece);
   border: 1px dashed #d4b896;
   border-radius: 2px;
-  opacity: 0.85;
+  opacity: 0.92;
   z-index: 1;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
 }
 /* 手帐主题：标签贴纸风格 */
 [data-theme="journal"] .rounded.bg-secondary,
-[data-theme="journal"] .rounded[class*="bg-primary/10"] {
+[data-theme="journal"] .rounded[class*="bg-primary\/10"] {
   border: 1px dashed #d4b896;
   border-radius: 2px;
   transform: rotate(-1deg);
   background: #ede3d4;
 }
-/* 手帐主题：按钮手绘感 */
+/* 手帐主题：贴纸元素（可用作角落装饰） */
+[data-theme="journal"] .sticker {
+  display: inline-block;
+  background: linear-gradient(135deg, #ffeb3b, #fff59d);
+  border: 1px solid #d4b896;
+  padding: 2px 8px;
+  font-size: 0.65rem;
+  color: #3d2a1e;
+  transform: rotate(2deg);
+  box-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+  border-radius: 2px;
+}
+[data-theme="journal"] .sticker-red {
+  background: linear-gradient(135deg, #ffcdd2, #ef9a9a);
+}
+[data-theme="journal"] .sticker-blue {
+  background: linear-gradient(135deg, #bbdefb, #90caf9);
+}
+/* 手帐主题：按钮手绘感 + 点状阴影 */
 [data-theme="journal"] .bg-primary {
+  background: linear-gradient(135deg, #8b5e3c, #6d4c35);
   border: 2px dashed #6b4226;
-  box-shadow: 2px 2px 0 #d4b89660;
+  border-radius: 4px;
+  box-shadow: 3px 3px 0 #d4b89660;
+  color: #fff8f0;
+  font-family: Georgia, serif;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+/* 按钮hover手绘抖动效果 */
+[data-theme="journal"] .bg-primary:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 #d4b89660;
+}
+[data-theme="journal"] .bg-primary:active {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0 #d4b89640;
+}
+/* 手帐主题：停止按钮红色警告风格 */
+[data-theme="journal"] .bg-destructive {
+  background: linear-gradient(135deg, #c0392b, #a93226);
+  border: 2px dashed #922b21;
+  border-radius: 4px;
+  box-shadow: 3px 3px 0 #d4b89660;
+  color: #fff8f0;
+  font-family: Georgia, serif;
+}
+[data-theme="journal"] .bg-destructive:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 #d4b89660;
+}
+[data-theme="journal"] .bg-destructive:active {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0 #d4b89640;
 }
 /* 手帐主题：选中项标记感 */
-[data-theme="journal"] [class*="bg-primary/10"] {
+[data-theme="journal"] [class*="bg-primary\/10"] {
   border-left: 3px solid #8b5e3c;
   background: #ede3d4;
 }
@@ -294,15 +365,27 @@
 [data-theme="journal"] textarea,
 [data-theme="journal"] select {
   border-style: dashed;
-  border-radius: 2px;
+  border-width: 2px;
+  border-radius: 3px;
+  background: #fdf8f0;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
-/* 手帐主题：滚动条牛皮纸色 */
+[data-theme="journal"] input:focus,
+[data-theme="journal"] textarea:focus {
+  border-color: #8b5e3c;
+  box-shadow: 2px 2px 0 #d4b89640;
+  outline: none;
+}
+/* 手帐主题：滚动条牛皮纸色 + 木纹 */
 [data-theme="journal"] ::-webkit-scrollbar-thumb {
-  background: #d4b896;
-  border-radius: 1px;
+  background: linear-gradient(to right, #d4b896, #c4a882, #d4b896);
+  border-radius: 2px;
+  border: 1px solid #b89b78;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
 }
 [data-theme="journal"] ::-webkit-scrollbar-thumb:hover {
-  background: #8b5e3c;
+  background: linear-gradient(to right, #8b5e3c, #6d4c35, #8b5e3c);
+  box-shadow: 0 0 4px rgba(139, 94, 60, 0.4);
 }
 
 /* ─────────────────────────────────────────────
